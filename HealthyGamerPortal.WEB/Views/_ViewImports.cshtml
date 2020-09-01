@@ -1,0 +1,26 @@
+﻿
+@using HealthyGamerPortal.WEB
+@using HealthyGamerPortal.Common.ViewModels;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, HealthyGamerPortal.WEB.TagHelpers
+@addTagHelper *, HealthyGamerPortal.WEB
+
+<script src="~/Js/dynamic-modal.js" asp-append-version="true"></script>
+<script src="~/Js/toastr.min.js" asp-append-version="true"></script>
+<script>
+    $(function () {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-top-center",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "4000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+    });
+</script>
+

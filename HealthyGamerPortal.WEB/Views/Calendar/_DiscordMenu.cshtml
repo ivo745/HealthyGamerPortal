@@ -1,0 +1,51 @@
+﻿@model HealthyGamerPortal.Common.ViewModels.Calendar.CalendarViewModel
+
+<aside class="another-sidebar">
+    <nav class="sidebar-nav">
+        <div id="external-events">
+            @foreach (var member in Model.discordMembers)
+            {
+                <div class="another-card-body">
+                    <div class="fc-event" id="@member.Id">
+                        <img style="max-width:64px; border-radius:50%;" src="@member.Avatar">
+                        <modal-form-trigger action="Read" display-name="@member.Name" parameters="new { id = member.Id }" name="@Html.DisplayFor(_ => member.Name)" url="@Url.Action("MemberDetails", "Calendar")" />
+                        <span class="text-muted">@Html.DisplayFor(_ => member.Item)</span>
+                    </div>
+                </div>
+            }
+        </div>
+    </nav>
+</aside>
+
+<style>
+    .page-wrapper > .container-fluid {
+        padding: 0px;
+        padding-left:10px;
+    }
+    .another-sidebar::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Hide scrollbar for IE and Edge */
+    .another-sidebar {
+      -ms-overflow-style: none;
+    }
+
+    .another-card-body {
+        flex: 1 1 auto;
+        max-width:50%;
+    }
+    .another-sidebar {
+        background-color: #3788d8;
+        width: 160px;
+        position: fixed;
+        height: 100%;
+        top: 0;
+        overflow-y: scroll;
+        z-index:999;
+    }
+    #external-events {
+        display: flex;
+        flex-wrap: wrap;
+    }
+</style>

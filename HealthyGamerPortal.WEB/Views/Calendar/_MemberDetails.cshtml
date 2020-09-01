@@ -1,0 +1,9 @@
+﻿@model HealthyGamerPortal.Common.ViewModels.Calendar.GuildUserItemViewModel
+
+<modal-form size="Large" title="Member Details">
+    <form asp-action="Read" id="validate-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form-entry asp-for="Name" input-type="Text" read-only="true" />
+        <form-entry asp-for="Note" input-type="Textarea" column-width="12" />
+    </form>
+</modal-form>

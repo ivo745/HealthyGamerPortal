@@ -1,0 +1,19 @@
+﻿
+@model HealthyGamerPortal.Common.ViewModels.AuthorizationManagement.AuthorizationManagementViewModel
+
+<modal-form size="Large" title="Add Profile">
+    <form asp-action="AddProfile" id="validate-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-12">
+            <div class=row>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="paragraph1">
+                        <div class="form-group">
+                            <select asp-for="test" multiple="multiple" class="multiselect-class" name="testList" asp-items="@Model.SelectList1"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</modal-form>

@@ -1,0 +1,25 @@
+﻿@model Discord.Rest.RestGuild
+
+<modal-form size="Large" title="Guilds">
+    <form asp-action="Create" id="validate-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form-entry asp-for="Name" input-type="Text" read-only="true" />
+        <form-entry asp-for="Id" input-type="Text" read-only="true" />
+        <div class="col-sm-12 col-xs-12">
+            <label class="control-label" for="Name">Members: </label>
+            @foreach (var item in await Model.GetUsersAsync().FirstOrDefault())
+            {
+                @if (!string.IsNullOrEmpty(item.GetAvatarUrl()))
+                {
+                    <a href="@Url.Action("Index", "Guild")">
+                        <img style="max-width:32px; border-radius:50%;" src="@item.GetAvatarUrl(Discord.ImageFormat.Auto, 32)" />
+                    </a>
+                }
+                else
+                {
+                    <img style="max-width:32px; border-radius:50%;" src="@item.GetDefaultAvatarUrl()" />
+                }
+            }
+        </div>
+    </form>
+</modal-form>

@@ -1,0 +1,74 @@
+﻿@using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<EmptyResult> stringLocalizer
+
+<aside class="left-sidebar" data-sidebarbg="skin5">
+    <nav class="sidebar-nav">
+        <ul id="sidebarnav" class="p-t-30 in">
+            <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index", "Home")" aria-expanded="false">
+                    <i class="fas fa-th"></i>
+                    <span class="hide-menu">@stringLocalizer["DashboardButtonText"]</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index", "Company")" aria-expanded="false">
+                    <i class="fa fa-building"></i>
+                    <span class="hide-menu">@stringLocalizer["CompanyButtonText"]</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index", "ApplicationUser")" aria-expanded="false">
+                    <i class="fa fa-users"></i> <span class="hide-menu">@stringLocalizer["UsersButtonText"]</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index", "Guild")" aria-expanded="false">
+                    <i class="fab fa-discord"></i> <span class="hide-menu">@stringLocalizer["GuildsButtonText"]</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index", "Calendar")" aria-expanded="false">
+                    <i class="far fa-calendar-check"></i> <span class="hide-menu">@stringLocalizer["CalendarButtonText"]</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                    <i class="fa fa-bug"></i> <span class="hide-menu">@stringLocalizer["SupportButtonText"]</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                    <i class="fa fa-question"></i> <span class="hide-menu">@stringLocalizer["FAQButtonText"]</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-wrench"></i><span class="hide-menu"> @stringLocalizer["ManagementButtonText"] </span></a>
+                <ul aria-expanded="false" class="collapse  first-level">
+                    <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="fas fa-question"></i><span class="hide-menu"> @stringLocalizer["FAQManagementButtonText"] </span></a></li>
+                    <li class="sidebar-item"><a href="@Url.Action("Index", "NewsItem" )" class="sidebar-link"><i class="far fa-newspaper"></i><span class="hide-menu"> @stringLocalizer["NewsManagementButtonText"] </span></a></li>
+                    <li class="sidebar-item"><a href="@Url.Action("Index", "ApplicationText" )" class="sidebar-link"><i class="fa fa-language"></i><span class="hide-menu"> @stringLocalizer["ApplicationTextButtonText"] </span></a></li>
+                    <li class="sidebar-item"><a href="@Url.Action("Index", "AuthorizationManagement" )" class="sidebar-link"><i class="fas fa-universal-access"></i><span class="hide-menu"> @stringLocalizer["AuthorizationManagementButtonText"] </span></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</aside>
+
+<style>
+    #main-wrapper.mini-sidebar .sidebar-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .sidebar-nav {
+        position: fixed;
+        overflow: scroll;
+        top: 65px;
+        bottom: 0;
+        width: inherit;
+    }
+
+    .sidebar-nav::-webkit-scrollbar {
+        display: none;
+        width: inherit;
+    }
+</style>

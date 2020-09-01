@@ -1,0 +1,109 @@
+﻿
+@model HealthyGamerPortal.Common.ViewModels.Users.CreateApplicationUserViewModel
+
+@{
+    ViewData["Title"] = "Create User";
+}
+<div class="col-8 mx-auto">
+    <h1>Create User</h1>
+    <hr />
+</div>
+<form asp-action="Create"></form>
+@using (Html.BeginForm("Create", "ApplicationUser", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="col-8 card mx-auto">
+                <div class="card-body">
+                    <h3 class="card-title">Personal Info</h3>
+                    <div class="row">
+                        <form-entry asp-for="FirstName" input-type="Text" column-width="4"></form-entry>
+                        <form-entry asp-for="MiddleName" input-type="Text" column-width="4"></form-entry>
+                        <form-entry asp-for="LastName" input-type="Text" column-width="4"></form-entry>
+                    </div>
+                    <div class="row">
+                        <form-entry asp-for="Email" input-type="Text" column-width="12"></form-entry>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="col-8 card mx-auto ">
+                <br />
+                <table class="table data-table" index-table="true">
+                    <thead>
+                        <tr>
+                            <th><h5 class="card-title m-b-0">Profiles</h5></th>
+                            <th><modal-form-trigger action="Create" only-icon="true" url="@Url.Action("AddProfile", "ApplicationUser")" /></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Manager - dfs</td>
+                            <td><i class="fas fa-trash-alt"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Manager - sdffs</td>
+                            <td><i class="fas fa-trash-alt"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Manager - sdff</td>
+                            <td><i class="fas fa-trash-alt"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+            </div>
+            <br />
+            <div class="col-8 card mx-auto ">
+                <br />
+                <table class="table data-table" index-table="true">
+                    <thead>
+                        <tr>
+                            <th><h5 class="card-title m-b-0">Roles</h5></th>
+                            <th><modal-form-trigger action="Create" only-icon="true" url="@Url.Action("AddRole", "ApplicationUser")" /></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>PwerShellUser</td>
+                            <td><i class="fas fa-trash-alt"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Admin</td>
+                            <td><i class="fas fa-trash-alt"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Manager</td>
+                            <td><i class="fas fa-trash-alt"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+            </div>
+            <br />
+            <div class="col-8 card mx-auto ">
+                <br />
+                <table class="table data-table" index-table="true">
+                    <thead>
+                        <tr>
+                            <th><h5 class="card-title m-b-0">Entrances</h5></th>
+                            <th><modal-form-trigger action="Create" only-icon="true" url="@Url.Action("AddEntrance", "ApplicationUser")" /></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Create_port</td>
+                            <td><i class="fas fa-trash-alt"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+            </div>
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-outline-success"><i class="fa fa-save"></i> Save</button>
+        <a class="btn btn-outline-primary" href="@Url.Action("Index", "ApplicationUser")"> Cancel</a>
+    </div>
+
+}

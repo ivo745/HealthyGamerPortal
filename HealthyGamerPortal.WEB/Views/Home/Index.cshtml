@@ -1,0 +1,116 @@
+﻿@model HealthyGamerPortal.Common.ViewModels.Home.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<section class="content-header">
+    <div class="row">
+        <!-- Column -->
+        <div class="col-md-6 col-lg-4 col-xlg-3">
+            <div class="card">
+                <div class="box bg-cyan text-center">
+                    <a>&nbsp;</a><br />
+                    <i style="color:white; font-size:3em;" class="fa fa-bug "></i>
+                    <h1 style="color:white;">Support</h1>
+                    <a style="color:white;" href="#">Create a ticket</a><br />
+                    <a style="color:white;" href="#">Check ticket status</a>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <div class="col-md-6 col-lg-4 col-xlg-3">
+            <div class="card">
+                <div class="box bg-success text-center">
+                    <a>&nbsp;</a><br />
+                    <i style="color:white; font-size:3em;" class="fa fa-wifi"></i>
+                    <h1 style="color:white;">Network</h1>
+                    <a style="color:white;" href="#">Network overview</a><br />
+                    <a>&nbsp;</a>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <div class="col-md-6 col-lg-4 col-xlg-3">
+            <div class="card">
+                <div class="box bg-warning text-center">
+                    <a>&nbsp;</a><br />
+                    <i style="color:white; font-size:3em;" class="fa fa-question"></i>
+                    <h1 style="color:white;">FAQ</h1>
+                    <a style="color:white;" href="#">Frequently Asked Questions</a><br />
+                    <a>&nbsp;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <!-- card new -->
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title m-b-0">News Updates</h4>
+            </div>
+            <ul class="list-style-none">
+                @foreach (var NewsItem in Model.NewsItemShortList)
+                {
+                    <li class="d-flex no-block card-body">
+                        <div>
+                            <modal-form-trigger action="Read" display-name="@NewsItem.Name" parameters="new { id = NewsItem.Id }" url="@Url.Action("NewsDetails", "Home")" />
+                            <span class="text-muted">@Html.DisplayFor(_ => NewsItem.Item)</span>
+                        </div>
+                        @if (NewsItem.DateCreated.HasValue)
+                        {
+                            <div class="ml-auto">
+                                <div class="tetx-right">
+                                    <h5 class="text-muted m-b-0">@Html.DisplayFor(_ => NewsItem.DateCreated.Value.Day)</h5>
+                                    <span class="text-muted font-16">@Html.DisplayFor(_ => NewsItem.DateCreatedFormatted)</span>
+                                </div>
+                            </div>
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+        <!-- card guild -->
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title m-b-0">Guilds Overview</h4>
+            </div>
+            <ul class="list-style-none" style="display: flex; flex-wrap: wrap;">
+                @foreach (var GuildItem in Model.GuildItemList)
+                {
+                    <li class="d-flex no-block another-card-body">
+                        <div data-tooltip="@GuildItem.Name">
+                            <modal-form-trigger action="Read" image-src="@GuildItem.Icon" parameters="new { id = GuildItem.Id }" url="@Url.Action("GuildDetails", "Home")" />
+                            <span class="text-muted">@Html.DisplayFor(_ => GuildItem.Item)</span>
+                        </div>
+                        @if (GuildItem.DateCreated.HasValue)
+                        {
+                            <div class="ml-auto">
+                                <div class="text-right">
+                                    <h5 class="text-muted m-b-0">@Html.DisplayFor(_ => GuildItem.DateCreated.Value.Day)</h5>
+                                    <span class="text-muted font-16">@Html.DisplayFor(_ => GuildItem.DateCreatedFormatted)</span>
+                                </div>
+                            </div>
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</section>
+
+<style>
+    .another-card-body {
+        padding: 20px;
+        max-width: 50%;
+    }
+
+    img.small-icon {
+        min-width: 64px;
+        min-height: 64px;
+        max-width: 64px;
+        border-radius: 10%;
+    }
+</style>

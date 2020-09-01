@@ -1,0 +1,38 @@
+﻿@model IEnumerable<HealthyGamerPortal.Common.ViewModels.News.NewsItemViewModel>
+
+@{
+    ViewData["Title"] = "News overview";
+}
+
+<div id="autoresize-card" class="col-8 card mx-auto">
+    <div class="col-md-2">
+        <br />
+        <div id="create-button"><modal-form-trigger action="Create" only-icon="false" url="@Url.Action("Create", "NewsItem")" /></div>
+        <br />
+    </div>
+    <table class="table data-table" index-table="true">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.DateCreated)</th>
+                <th></th>
+                <th><modal-form-trigger action="Create" only-icon="true" url="@Url.Action("Create", "NewsItem")" /></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var news in Model)
+            {
+                <tr>
+                    <td><a asp-action="Details" asp-route-id="@news.Id">@Html.DisplayFor(_ => news.Name)</a></td>
+                    <td>@Html.DisplayFor(_ => news.DateCreated)</td>
+                    <td></td>
+                    <td>
+                        <modal-form-trigger action="Edit" parameters="new { id = news.Id  }" only-icon="true" url="@Url.Action("Edit", "NewsItem")" />
+                        <modal-form-trigger action="Delete" parameters="new { id = news.Id  }" only-icon="true" url="@Url.Action("Delete", "NewsItem")" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+</div>

@@ -1,0 +1,15 @@
+﻿@model HealthyGamerPortal.Common.ViewModels.Company.CreateCompanyBuildingViewModel
+
+<modal-form size="Large" title="Create a Company">
+    <form asp-action="Create" id="validate-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class=row>
+            <form-entry asp-for="Name" input-type="Text" column-width="6"></form-entry>
+            <form-entry asp-for="ContactName" input-type="Text" column-width="6"></form-entry>
+        </div>
+        <div class="row">
+            <form-entry asp-for="ContactEmail" input-type="Text" column-width="6"></form-entry>
+            <form-entry asp-for="ContactEmail" input-type="Text" column-width="6"></form-entry>
+        </div>
+    </form>
+</modal-form>

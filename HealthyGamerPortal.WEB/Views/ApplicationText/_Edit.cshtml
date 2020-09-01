@@ -1,0 +1,10 @@
+﻿@model HealthyGamerPortal.Common.ViewModels.LocalizationRecords.LocalizationRecordViewModel
+<modal-form size="Medium" title="Edit a Application Text">
+    <form asp-action="edit" id="validate-form">
+        @Html.HiddenFor(m => m.Id)
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class=row>
+            <form-entry asp-for="Text" input-type="Text" column-width="6"></form-entry>
+        </div>
+    </form>
+</modal-form>

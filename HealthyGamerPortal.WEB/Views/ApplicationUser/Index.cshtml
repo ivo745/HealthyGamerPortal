@@ -1,0 +1,41 @@
+﻿
+@model IEnumerable<HealthyGamerPortal.Common.ViewModels.Users.ApplicationUserViewModel>
+
+@{
+    ViewData["Title"] = "Users overview";
+}
+
+<div id="autoresize-card" class="col-8 card mx-auto">
+    <div class="col-md-2">
+        <br />
+        <input type="button" value="Create" class="btn btn-success margin-5" onclick="location.href='@Url.Action("Create", "ApplicationUser")'" />
+        <br />
+    </div>
+    <table class="table data-table" index-table="true" order-columns="3">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                <th></th>
+                <th><a asp-action="Create"><span class="fas fa-plus"></span></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var users in Model)
+            {
+                <tr>
+                    <td><a asp-action="Details" asp-route-id="@users.Id">@Html.DisplayFor(_ => users.FirstName)</a></td>
+                    <td>@Html.DisplayFor(_ => users.LastName)</td>
+                    <td>@Html.DisplayFor(_ => users.Email)</td>
+                    <td></td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@users.Id"><span class="fa fa-edit"></span></a>
+                        <modal-form-trigger action="Delete" parameters="new { id = users.Id  }" only-icon="true" url="@Url.Action("Delete", "ApplicationUser")" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+</div>

@@ -1,0 +1,32 @@
+﻿<header class="topbar" data-navbarbg="skin5">
+    <nav class="navbar top-navbar navbar-expand-md navbar-dark ">
+        <div class="navbar-header" data-logobg="skin5">
+            <!-- This is for the sidebar toggle which is visible on mobile only -->
+            <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="fas fa-bars ti-menu ti-close"></i></a>
+            <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                <span class="logo-text">
+                    <img src="~/Images/HG/Logos/logo-main-1.png" width="75%" height="75%" alt="homepage" class="d-inline-block">
+                </span>
+            </a>
+            <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-ellipsis-h ti-more"></i></a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+            <ul class="navbar-nav float-left mr-auto">
+                <li class="nav-item d-none d-md-block"><a style="float:left;" class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="fas fa-bars mdi mdi-menu font-24"></i></a></li>
+            </ul>
+            <ul class="navbar-nav float-right">
+                <li class="nav-item dropdown">
+                    <a style="float:right;" class="nav-link dropdown-toggle waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img style="width:44px; margin:10px; border-radius:50%;" src="~/Images/HG/Avatars/giant.png" /></a>
+                    <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5">@Context.User.Identity.Name</i> Account Setting</a>
+                        <div class="dropdown-divider"></div>
+                        @await Html.PartialAsync("_SelectLanguagePartial")
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="@Url.Action("Logout", "Account")"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

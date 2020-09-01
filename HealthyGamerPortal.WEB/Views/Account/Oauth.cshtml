@@ -1,0 +1,15 @@
+﻿@model HealthyGamerPortal.Common.ViewModels.Login.BasicLoginViewModel
+
+@{
+    ViewData["Title"] = "Login Form";
+    Layout = "~/Views/Shared/_UnauthenticatedLayout.cshtml";
+}
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-signin" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Username", required = "required", autofocus = "autofocus" } })
+    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+    <br />
+    <button class="btn btn-default btn-block btn-custom" type="submit">Login</button>
+}

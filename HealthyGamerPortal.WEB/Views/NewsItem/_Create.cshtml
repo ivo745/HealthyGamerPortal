@@ -1,0 +1,14 @@
+﻿
+@model HealthyGamerPortal.Common.ViewModels.News.CreateNewsItemViewModel
+
+<modal-form size="Large" title="Create a News Item">
+    <form asp-action="Create" id="validate-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class=row>
+            <form-entry asp-for="Name" input-type="Text" column-width="12"></form-entry>
+        </div>
+        <div class="row">
+            <form-entry asp-for="Item" input-type="Textarea" column-width="12"></form-entry>
+        </div>
+    </form>
+</modal-form>

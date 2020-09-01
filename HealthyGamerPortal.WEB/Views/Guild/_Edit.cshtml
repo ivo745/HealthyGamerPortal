@@ -1,0 +1,35 @@
+﻿
+@model HealthyGamerPortal.Common.ViewModels.Guild.EditGuildItemViewModel
+
+<modal-form size="Large" title="Edit a Guild">
+    <form asp-action="Edit" id="validate-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form-entry asp-for="Id" input-type="Text" read-only="true" />
+        <form-entry asp-for="Name" input-type="Text"></form-entry>
+        <div class="col-sm-12 col-xs-12">
+            <label class="control-label" for="Name">Invite User: </label>
+            @if (Model.guildUsers != null)
+            {
+                @foreach (var item in Model.guildUsers)
+                {
+                    <a data-tooltip="@item.Name">
+                        <img onclick="AddUser('@item.Id')" style="max-width:32px; border-radius:50%;" src="@item.Avatar" />
+                    </a>
+                }
+            }
+        </div>
+    </form>
+</modal-form>
+
+<script>
+    function AddUser(id, name) {
+        toastr.success("Invite sent.");
+        $.ajax({
+            type: "POST",
+            data: {
+                id: id,
+            },
+            url: '@Url.Action("AddUser", "Guild")',
+        });
+    }
+</script>

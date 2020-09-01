@@ -1,0 +1,152 @@
+﻿@model HealthyGamerPortal.Common.ViewModels.Calendar.CalendarViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <div class="row">
+        <div class="col-md-2">
+            <div id="external-events">
+                @foreach (var member in Model.discordMembers)
+                {
+                    @for (int i = 0; i < 20; i++)
+                    {
+                        <div class="another-card-body">
+                            <div class="fc-event" id="@member.Id">
+                                <img style="max-width:64px; border-radius:50%;" src="@member.Avatar">
+                                <modal-form-trigger action="Read" display-name="@member.Name" parameters="new { id = member.Id }" name="@Html.DisplayFor(_ => member.Name)" url="@Url.Action("MemberDetails", "Calendar")" />
+                                <span class="text-muted">@Html.DisplayFor(_ => member.Item)</span>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-md-8">
+            <form asp-controller="Calendar" asp-action="Index" method="post">
+                <select asp-for="guildId" asp-items="@Model.guildList">
+                    <option>Please select one</option>
+                </select>
+                <input type="submit" value="Submit" />
+            </form>
+            <div class="card-primary">
+                <div class="card-body p-0">
+                    <div id='calendar'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src='~/packages/core/main.js'></script>
+    <script src='~/packages/interaction/main.js'></script>
+    <script src='~/packages/daygrid/main.js'></script>
+    <script src='~/packages/list/main.js'></script>
+    <script src='~/packages/google-calendar/main.js'></script>
+}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function AddEvent(date, attendee) {
+            $.ajax({
+                type: "POST",
+                data: {
+                    date: date,
+                    attendee: attendee
+                },
+                url: '@Url.Action("AddEvent", "Calendar")',
+            });
+        }
+
+        function UpdateEvent(id, date, attendee) {
+            $.ajax({
+                type: "POST",
+                data: {
+                    id: id,
+                    date: date,
+                    attendee: attendee
+                },
+                url: '@Url.Action("UpdateEvent", "Calendar")',
+            });
+        }
+
+        let Draggable = FullCalendarInteraction.Draggable;
+        let calendarEl = document.getElementById('calendar');
+        let containerEl = document.getElementById('external-events');
+        new Draggable(containerEl, {
+            itemSelector: '.fc-event',
+            eventData: function (eventEl) {
+                return {
+                    title: eventEl.innerText.trim()
+                }
+            }
+        });
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+
+            plugins: ['interaction', 'dayGrid', 'list', 'googleCalendar'],
+
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            },
+
+            displayEventTime: false,
+            googleCalendarApiKey: 'AIzaSyB8CeJXwEpvQNgdgnL_Tw_89hqHKeOq75g',
+
+            events: {
+                googleCalendarId: 'o25ue1mi0sb2c1drl81j9amoa4@group.calendar.google.com'
+            },
+
+            eventClick: function (arg) {
+                window.open(arg.event.url, 'google-calendar-event', 'width=700,height=600');
+                arg.jsEvent.preventDefault()
+            },
+
+            eventDrop: function (arg) {
+                console.log(arg)
+                UpdateEvent(arg.event.id, arg.event.start.toJSON(), arg.event.title)
+            },
+
+            editable: true,
+            droppable: true,
+            drop: function (arg) {
+                console.log(arg)
+                AddEvent(arg.date.toJSON(), arg.draggedEl.innerText)
+            }
+        });
+
+        calendar.render();
+    });
+</script>
+
+<style>
+    @@media (min-width: 768px) {
+        .col-md-2 {
+            margin-top: 80px;
+        }
+    }
+
+    .col-md-2::-webkit-scrollbar {
+        display: none;
+    }
+
+    .col-md-2 {
+        overflow: scroll;
+        min-width:160px;
+        -ms-overflow-style: none;
+    }
+
+    .page-wrapper > .container-fluid {
+        padding: 0px;
+        padding-left: 10px;
+    }
+
+    #external-events {
+        display: flex;
+        flex-wrap: wrap;
+        /* overflow: overlay; */
+        max-height: 190px;
+    }
+</style>

@@ -1,0 +1,154 @@
+﻿@using HealthyGamerPortal.WEB.Layout
+@using Microsoft.Extensions.Options
+@using Microsoft.Extensions.Localization;
+@addTagHelper *, Microsoft.AspNetCore.MvcTagHelpers
+@addTagHelper *, HealthyGamerPortal.WEB.TagHelpers
+@inject IOptions<HealthyGamerPortalApplicationLayoutOptions> LayoutOptions
+@inject IStringLocalizer<EmptyResult> stringLocalizer
+@{
+    var titlePrefix = ViewData["Title"] as string;
+    var titleSuffix = LayoutOptions.Value.PageTitleSuffix;
+    var seperator = string.IsNullOrWhiteSpace(titlePrefix) || string.IsNullOrWhiteSpace(titleSuffix) ? null : " - ";
+    var title = $"{titlePrefix}";
+    //var title = $"{titlePrefix}{seperator}{titleSuffix}";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@title</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="18x18" href="~/Images/HG/favicon/befores-18x18.png" />
+    <title>HealthyGamerGG</title>
+    <!-- Custom CSS -->
+    <link href="~/Css/min/animate.css" rel="stylesheet" />
+    <link href="~/Css/min/toastr.css" rel="stylesheet" />
+    <link href="~/Css/min/loadspinner.css" rel="stylesheet" />
+    <link href="~/Css/min/datatable.css" rel="stylesheet" />
+    <link href="~/Css/min/modal.css" rel="stylesheet" />
+    <link href="~/Css/min/tabs.css" rel="stylesheet" />
+    <link href="~/Css/min/panelcollapse.css" rel="stylesheet" />
+    <link href="~/Css/min/select2.css" rel="stylesheet" />
+    <link href="~/Css/min/select2-custom.css" rel="stylesheet" />
+    <link href="~/Css/min/multiselect.css" rel="stylesheet" />
+    <link href="~/Css/min/tooltip.css" rel="stylesheet" />
+    <link href='../packages/core/main.min.css' rel='stylesheet' />
+    <link href='../packages/daygrid/main.min.css' rel='stylesheet' />
+    <link href='../packages/list/main.min.css' rel='stylesheet' />
+    <link href="~/Css/min/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="main-wrapper" data-sidebartype="mini-sidebar">
+        <partial name="_TopMenu" />
+        <partial name="_LeftMenu" />
+        <div class="page-wrapper">
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">@title</h4>
+                        <div class="ml-auto text-right">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">@Html.ActionLink("Home", "Index", "Home")</li>
+                                    @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
+                                    {
+                                        @:<li class="breadcrumb-item">
+                                            <span class="fas fa-angle-right">&ensp;</span> @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index", ViewContext.RouteData.Values["controller"].ToString())
+                                        @:</li>
+                                    }
+                                    @if (ViewContext.RouteData.Values["action"].ToString() != "Index")
+                                    {
+                                        @:<li class="breadcrumb-item active">
+                                            <span class="fas fa-angle-right">&ensp;</span>@Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())
+                                        @:</li>
+                                    }
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <section class="content">
+                    <div id="content">
+                        <div class="main-content-container">
+                            <div class="toast-container"></div>
+                            @RenderBody()
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <footer class="footer text-center">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 1.0
+                </div>
+                &copy; 2020 - HealthyGamerGG - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </footer>
+        </div>
+    </div>
+
+    <!--This page JavaScript -->
+    @RenderSection("Scripts", required: false)
+
+    <!-- jQuery 3 -->
+    <script src="~/Js/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="~/Js/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <theme-helper Url="window.location.href"></theme-helper>
+    <script>
+        $(function () {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "positionClass": "toast-bottom-left",
+                "tapToDismiss": true,
+                "onclick": null,
+                "showDuration": "3000000",
+                "hideDuration": "40000000",
+                "timeOut": "10000",
+                "showEasing": "swing",
+                "hideEasing": "swing",
+                "showMethod": "fadeIn",/* "slideUp",*/
+                "hideMethod": "fadeOut",/*"slideDown",*/
+                "newestOnTop": true,
+            };
+        });
+    </script>
+    <script src="~/Js/jquery-3.4.1/jquery.validate.min.js"></script>
+    <script src="~/Js/jquery-3.4.1/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Js/min/validate-decimal.js"></script>
+    <script>
+    $(function () {
+        var error = '@Html.Raw(TempData["error-msg"])';
+        if (error !== '')
+            toastr.error(error, "");
+
+        var success = '@Html.Raw(TempData["success-msg"])';
+        if (success !== '')
+            toastr.success(success, "")
+    });
+    </script>
+    <script src="~/Js/min/dynamic-modal.js"></script>
+    <script src="~/Js/toastr.min.js"></script>
+    <script src="~/Js/select2.min.js"></script>
+    <script src="~/Js/min/jquery.multi-select.js"></script>
+    <script src="~/Js/min/quicksearch.js"></script>
+    <script src="~/Js/datatables.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/Js/bootstrap/bootstrap.min.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/Js/min/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/Js/min/custom.js"></script>
+    <script src="~/Js/min/datatables.custom.js"></script>
+    <!--This page JavaScript -->
+    <script>
+        $(document).ready(function () {
+            $(".statesSelect").select2();
+        });
+    </script>
+</body>
+</html>

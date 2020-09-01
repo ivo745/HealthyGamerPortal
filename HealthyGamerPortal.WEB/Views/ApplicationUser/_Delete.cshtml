@@ -1,0 +1,17 @@
+﻿
+@model HealthyGamerPortal.Common.ViewModels.Users.DeleteApplicationUserViewModel
+
+    <modal-form size="Large" title="Delete User">
+        <form asp-action="Delete" id="validate-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(m => m.Id)
+            <div class=row>
+                <form-entry asp-for="FirstName" input-type="Text" read-only="true" column-width="6"></form-entry>
+                <form-entry asp-for="LastName" input-type="Text" read-only="true" column-width="6"></form-entry>
+            </div>
+            <div class="row">
+                <form-entry asp-for="Email" input-type="Text" read-only="true" column-width="6"></form-entry>
+                <form-entry asp-for="Email" input-type="Text" read-only="true" column-width="6"></form-entry>
+            </div>
+        </form>
+    </modal-form>

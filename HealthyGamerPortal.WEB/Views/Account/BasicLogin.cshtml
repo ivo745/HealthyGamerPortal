@@ -1,0 +1,29 @@
+﻿@model HealthyGamerPortal.Common.ViewModels.Login.BasicLoginViewModel
+
+@{
+    ViewData["Title"] = "Basic Login form";
+    Layout = "~/Views/Shared/_UnauthenticatedLayout.cshtml";
+}
+
+@using (Html.BeginForm("BasicAuth", "Account", FormMethod.Post, new { @class = "form-signin" }))
+{
+    @Html.AntiForgeryToken()
+    <label for="inputEmail" class="sr-only">Email</label>
+    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Username", required = "required", autofocus = "autofocus" } })
+    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+    <br />
+    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password", required = "required", autofocus = "autofocus" } })
+    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+    <br />
+    <div class="checkbox">
+        <label>
+            @Html.CheckBox("Remember") Remember my password
+        </label>
+    </div>
+    <br />
+    <button class="btn btn-default btn-block btn-custom" type="submit">Login</button>
+    <br />
+    <div class="forgot-password">
+        <a href="@Url.Action("ForgotPassword", "Account")">Reset password</a>
+    </div>
+}

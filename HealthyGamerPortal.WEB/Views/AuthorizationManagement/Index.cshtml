@@ -1,0 +1,91 @@
+﻿
+@model HealthyGamerPortal.Common.ViewModels.AuthorizationManagement.AuthorizationManagementViewModel
+
+@{
+    ViewData["Title"] = "Authorization Management";
+}
+
+<!DOCTYPE html>
+<div class="card">
+    <br />
+    <div class="col-md-2">
+        <h5 class="card-title m-b-0">Profiles</h5>
+        <br />
+        <input type="button" value="Create" class="btn btn-success margin-5" onclick="location.href='@Url.Action("CreateProfile", "AuthorizationManagement")'" />
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.ProfileList[0].Name)</th>
+                <th></th>
+                <th><a asp-action="CreateProfile"><span class="fas fa-plus"></span></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var profile in Model.ProfileList)
+            {
+                <tr>
+                    <td><a asp-action="Details">@Html.DisplayFor(_ => profile.Name)</a></td>
+                    <td></td>
+                    <td><modal-form-trigger action="Edit" only-icon="true" url="@Url.Action("EditProfile", "AuthorizationManagement")" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <br />
+    <div class="col-md-1">
+        <h5 class="card-title m-b-0">Roles</h5>
+        <br />
+        <input type="button" value="Create" class="btn btn-success margin-5" onclick="location.href='@Url.Action("CreateRole", "AuthorizationManagement")'" />
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.RoleList[0].Name)</th>
+                <th></th>
+                <th><a asp-action="CreateRole"><span class="fas fa-plus"></span></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model.RoleList)
+            {
+                <tr>
+                    <td><a asp-action="Details">@Html.DisplayFor(_ => role.Name)</a></td>
+                    <td></td>
+                    <td><modal-form-trigger action="Edit" only-icon="true" url="@Url.Action("EditProfile", "AuthorizationManagement")" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="card">
+    <br />
+    <div class="col-md-1">
+        <h5 class="card-title m-b-0">Entrances</h5>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.AccessList[0].Name)</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var access in Model.AccessList)
+            {
+                <tr>
+                    <td><a asp-action="Details">@Html.DisplayFor(_ => access.Name)</a></td>
+                    <td></td>
+                    <td><modal-form-trigger action="Edit" only-icon="true" url="@Url.Action("EditEntrance", "AuthorizationManagement")" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

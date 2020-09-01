@@ -1,0 +1,61 @@
+﻿
+@model HealthyGamerPortal.Common.ViewModels.AuthorizationManagement.AuthorizationManagementViewModel
+
+@{
+    ViewData["Title"] = "Create Role";
+}
+
+<form asp-action="Create" id="validate-form">
+    <div class="row">
+        <div class="col-12">
+
+            <div class="col-10 card mx-auto">
+                <div class="card-body">
+                    <h4 class="card-title">Role Info</h4>
+                    <div class="form-group row">
+
+                        <div class="col-sm-9">
+                            <form-entry asp-for="GenericName" input-type="Text" column-width="12"></form-entry>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-9">
+                            <form-entry asp-for="GenericDescription" input-type="Textarea" column-width="12"></form-entry>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="col-10 card mx-auto">
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th><h5 class="card-title m-b-0">Entrances</h5></th>
+                                <th></th>
+                                <th><modal-form-trigger action="Create" only-icon="true" url="@Url.Action("AddEntrance", "User")" /></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Entrances in Model.AccessList)
+                            {
+                                <tr>
+                                    <td><a asp-action="Details" asp-route-id="@Entrances.Name">@Html.DisplayFor(_ => Entrances.Name)</a></td>
+
+                                    <td></td>
+                                    <td><i class="fas fa-trash-alt"></i></td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-outline-success"><i class="fa fa-save"></i> Save</button>
+                <a class="btn btn-outline-primary" href="@Url.Action("Index", "AuthorizationManagement")"> Cancel</a>
+            </div>
+        </div>
+    </div>
+</form>

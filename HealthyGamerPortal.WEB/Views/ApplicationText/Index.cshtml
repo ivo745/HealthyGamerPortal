@@ -1,0 +1,33 @@
+﻿@model IEnumerable<HealthyGamerPortal.Common.ViewModels.LocalizationRecords.LocalizationRecordViewModel>
+
+@{
+    ViewData["Title"] = "Users overview";
+}
+
+<div id="autoresize-card" class="col-8 card mx-auto">
+    <br />
+    <table class="table data-table" index-table="true">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Key)</th>
+                <th>@Html.DisplayNameFor(model => model.Text)</th>
+                <th>@Html.DisplayNameFor(model => model.LocalizationCulture)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var LocalizationText in Model)
+            {
+                <tr>
+                    <td><a asp-action="Details" asp-route-id="@LocalizationText.Id">@Html.DisplayFor(_ => LocalizationText.Key)</a></td>
+                    <td>@Html.DisplayFor(_ => LocalizationText.Text)</td>
+                    <td>@Html.DisplayFor(_ => LocalizationText.LocalizationCulture)</td>
+                    <td>
+                        <modal-form-trigger action="Edit" parameters="new { id = LocalizationText.Id  }" only-icon="true" url="@Url.Action("Edit", "ApplicationText")" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+</div>

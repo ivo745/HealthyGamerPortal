@@ -1,0 +1,41 @@
+﻿@model IEnumerable<HealthyGamerPortal.Common.ViewModels.Company.CompanyBuildingViewModel>
+
+@{
+    ViewData["Title"] = "Company overview";
+}
+
+<div id="autoresize-card" class="col-8 card mx-auto">
+    <div class="col-md-2">
+        <br />
+        <div id="create-button"><modal-form-trigger action="Create" only-icon="false" url="@Url.Action("Create", "Company")" /></div>
+    </div>
+    <table class="table data-table" index-table="true">
+        <thead>
+            <tr>
+                <th>
+                    @*<input asp-for="ID" type="hidden" />*@
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>@Html.DisplayNameFor(model => model.ContactName)</th>
+                <th>@Html.DisplayNameFor(model => model.ContactEmail)</th>
+                <th>@Html.DisplayNameFor(model => model.Buildings)</th>
+                <th></th>
+                <th><modal-form-trigger action="Create" only-icon="true" url="@Url.Action("Create", "Company")" /></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var company in Model)
+            {
+                <tr>
+                    <td><a asp-action="Details" asp-route-id="@company.Id">@Html.DisplayFor(_ => company.Name)</a></td>
+                    <td>@Html.DisplayFor(_ => company.ContactName)</td>
+                    <td>@Html.DisplayFor(_ => company.ContactEmail)</td>
+                    <td>@Html.DisplayFor(_ => company.Buildings)</td>
+                    <td></td>
+                    <td><modal-form-trigger action="Edit" parameters="new { id = company.Id  }" only-icon="true" url="@Url.Action("Edit", "Company")" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+</div>
